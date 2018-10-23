@@ -7,15 +7,22 @@ function inputLength() {
     return input.value.length;
 }
 
+
+//Creates the list element, creates a delete button and appends it to list element, 
+//defines the click function to the delete button and when it encounters a click it removes the list item.
 function createListElement() {
     var li = document.createElement("li");
     var delButton = document.createElement('button');
     li.appendChild(document.createTextNode(input.value + "  "));
     ul.appendChild(li);
+    input.value = "";
     li.appendChild(delButton)
     delButton.innerHTML = "Remove";
-    input.value = "";
+    delButton.addEventListener("click", function(event) {
+        this.parentNode.parentNode.removeChild(this.parentNode);
+    })
 }
+
 
 //If the length of the input in the box is greater than 0, create a text node in li.
 function addListAfterClick() {
@@ -33,19 +40,8 @@ function addListAfterKeyPress(event) {
 
 //Add an event listener for "click", if anyone clicks run this function.
 
-button.addEventListener("click", addListAfterClick, delListItem);
+button.addEventListener("click", addListAfterClick);
 
 //If anyone ever presses this key run this function.
 
 input.addEventListener("keypress", addListAfterKeyPress);
-
-//1. If you click on the list item, it toggles the .done  class on and off.
-
-//2. Add buttons next to each list item to delete the item when clicked on its corresponding delete button.
-
-function delListItem() {
-    li.toggle("done");
-    
-}
-
-// 3. BONUS: When adding a new list item, it automatically adds the delete button next to it. 
